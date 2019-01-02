@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php session_start(); ?>
 <?php
-include 'sql2.inc.php';
+include 'sql.inc.php';
+$acc = $_SESSION['accnum'];
+$conn = mysqli_connect("localhost","root","7eKyUaaWsNm7O795","data");
+$sql1 = "Select * FROM data_2 where ACCNUM = \"{$acc}\" " ;
+$re = mysqli_query($conn,$sql1) ;
+$row=mysqli_fetch_assoc($re);
+$pw = $row['PASSWORD'];
+$name = $row['NAME'];
+$passqa = $row['PASSQA'];
+$department = $row['DEPARTMENT'] ;
+mysqli_query($conn, "SET NAMES 'utf8'");
+$json_array = array();
+$json_encode=json_encode($json_array);
+while ($row = mysqli_fetch_assoc($re)){
+       $json_array[] = $row;
+}
 ?>
 <html>
     <head>
@@ -25,8 +35,6 @@ include 'sql2.inc.php';
         }
         nav {
         width: 100%;
-        color:#F8ECC2;
-        font-weight:bold;
         background-color:#65A8A6;
         }
         nav ul li {
@@ -78,119 +86,93 @@ include 'sql2.inc.php';
                 text-align: center;
 	}
         </style>
+
+        <link rel="stylesheet" type="text/css" href="css/datatables.min.css">
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/datatables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var apiUrl="jsongetdata.php"
+				$.ajax({
+				  "url":apiUrl,
+				  "type":"GET",
+				  "dataType": 'json',
+				  "data":{
+					
+				  },
+				  "success":function(DataJson){console.log(DataJson.data);
+					$("#demo").append('<tbody>');
+					$.each(DataJson.data,function(index, element) {
+						console.log(element);
+					  //TypeOf element = object
+					   if element.aa == 'A'
+						stat = "<td stlye='coler=...'>已接受</t>"
+					  $("#demo").append(
+					  '<tr>'+ stat + '<td>'+element.OBJECT+'</td><td>element.TEACHER</td><td>element.DATE</td><td>element.TIME</td><td>element.NOP</td><td>element.QUESTION_S</td><td>element.STATUS</td><td>element.QUESTION_T</td><td>element.NAME_S</td><td>element.NOP</td><td><input type="button"  value="取消"  style="background-color:#66818C;border:0;COLOR:white" onclick="cancel()" ></td></tr>'
+					  )
+					  
+					});
+					
+					$("#demo").append('</tbody>');
+					$('#demo').DataTable();
+				  }
+				});
+                
+                $('#demo tbody').on( 'click', 'button', function () {
+                    if(confirm("您確定要取消預約嗎？"))
+                    {
+                        alert("以取消預約");
+                        location.href='teacher_login.php';
+                    }
+                    else
+                    {
+                    }
+                } );
+            } );
+        </script>
     </head>
     <body>
         <div class=all>
             <nav>
                   <a href="#" class="menu-trigger">Menu</a>
                   <ul>
-                      <div  style="float: left;line-height:60px">
-                         <?php echo "<li>".$name1."，您好</li>"  ?>
-                      </div>
-                      <div  style="text-align:right"> 
                     <li><a href="#" onclick="location.href='teacher_login.php'">尚未回覆</a></li>
                     <li><a href="#" onclick="location.href='teacher_already.php'">已回覆</a></li>
                     <li><a href="#" onclick="location.href='teacher_change_pw.php'">修改密碼</a></li>
                     <li><a href="#" onclick="logout()">登出</a></li>
-                    
                     <script>
                         function logout(){
                         if(confirm("您確定要登出嗎？"))
                         {
-                        location.href='loginout.php';
+                        alert("登出成功");
+                        location.href='home.php';
                         }
                         else
                         {
                         }
                     }
                     </script>
-                      </div>
                   </ul>
             </nav>
-            <table class="demo">
-	<caption>尚未回覆</caption>
+            <table id="demo" class="display">
+
+       <thead>
+            <tr>
                 <th>姓名</th>
-		<th>科目</th>
-		<th>日期</th>
-		<th>時段</th>
-		<th>人數</th>
-		<th>學生備註</th>
+                <th>科目</th>
+                <th>日期</th>
+                <th>時段</th>
+                <th>人數</th>
+                <th>學生備註</th>
                 <th>老師備註</th>
                 <th>審核</th>
-	<tbody>
-	<tr>
-		<td>王小明</td>
-		<td>微積分</td>
-		<td>2018/11/29</td>
-		<td>08:00AM~09:00AM</td>
-		<td>1 人</td>
-		<td>微積分2-3</td>
-                <td>
-                    <textarea cols="50" rows="2" placeholder="老師備註" class="textbox2"></textarea>
-                </td>
-                <td>
-                <select class="textbox1">
-                <option selected="true">尚未審核</option>
-                <option >接受</option>
-                <option >婉拒</option>
-                </select>
-                    <input type="submit"  value="確認"  style="background-color:#66818C;border:0;COLOR:white" onclick="signup()" >
-                    <script>
-                    function signup() {
-                        if(confirm("確定要接受嗎？"))
-                        {
-                        alert("已接受此預約");
-                        location.href='teacher_already.php';
-                        }
-                        else
-                        {
-                        }
-                    }
-                    </script>
-                 </td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-                <td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-	</tr>
-	<tbody>
-</table>
+				<th>取消1</th>
+				<th>取消2</th>
+				<th>取消3</th>
+				<th>取消4</th>
+            </tr>
+        </thead>
+    </table>
         </div>
     </body>
 </html>
