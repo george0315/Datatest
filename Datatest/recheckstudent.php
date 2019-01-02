@@ -11,24 +11,30 @@ $date = $_POST['date'];
 $time = $_POST['time'];
 $nop = $_POST['nop'] ;
 $questions = $_POST['question_s'] ;
+$nowtime =  strtotime($now) ;
+$future =  strtotime($date) ;
 $sql1 = "Select * FROM information where accnum = '$acc'"  ;
 $re = mysqli_query($conn,$sql1) ;
 $row=mysqli_fetch_array($re,MYSQLI_ASSOC);
+
 if($acc != null && $object != null && $teacher != null && $date != null && $time != null && $nop != null)
 {   
-  if($now > $time){
+  if($nowtime - $future >= 0){
                 echo '<script>alert("此時段已過期，請選擇其他時段來預約");</script>';
                 mysqli_close($conn) ;
-                echo '<script>window.location.replace("student_record.php");</script>';
+                echo '<script>window.location.replace("student_login.php");</script>';
   }
   else{
-       if($acc==$acc2 && $date==$date2 && $time == $time2 && $name == $name2){
+      for($i = 0 ; $i <= $a-1;$i++){
+       if($acc==$acc2[$i] && $date==$date2[$i] && $time == $time2[$i] && $name == $name2[$i]){
                 echo '<script>alert("此時段您已預約，請先取消或選擇其他時段預約");</script>';
                 mysqli_close($conn) ;
                 echo '<script>window.location.replace("student_record.php");</script>';
         
       }
-        else{
+      } 
+        //這邊要再檢查
+        //else{
            //新增資料進資料庫語法
            $sql = "INSERT INTO reservation (ACCNUM,OBJECT,TEACHER, DATE, TIME, NOP, QUESTION_S,STATUS,NAME_S) VALUES ('$acc', '$object', '$teacher', '$date', '$time','$nop','$questions','審核中','$name')";
            if(mysqli_query($conn,$sql))
@@ -43,7 +49,7 @@ if($acc != null && $object != null && $teacher != null && $date != null && $time
                 mysqli_close($conn) ;
                 echo '<script>window.location.replace("student_login.php");</script>';
            }
-       }
+       //}
   }
 }
 else
@@ -52,6 +58,7 @@ else
         mysqli_close($conn) ;
         echo '<script>window.location.replace("student_login.php");</script>';
 }
+ 
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
