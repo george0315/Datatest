@@ -78,6 +78,13 @@ include 'sql2.inc.php';
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
     <script>
             function chk(){
+			if(document.send1.status.value== 0){
+				if(document.send1.comment.value == "" || null){
+            alert('尚未更改狀態或備註');
+            //document.send1.status.focus();
+            return false;
+            }
+			}			
             if(document.send1.status.value== 1 || 2){
             alert('確認要更改狀態嗎?');
             //document.send1.status.focus();
@@ -109,7 +116,7 @@ include 'sql2.inc.php';
                                       '<td>'+ element.STATUS+'</td>'+
                                       '<td>'+'<select name = "status" form = "'+element.ID+'" class="textbox1"><option selected="true" value = "0">更改狀態</option><option value = "1">接受</option><option value="2">婉拒</option></select>'+
 									  '<input type="hidden" form = "'+element.ID+'"  name="id" value="'+element.ID +'">'+
-                                      '<input type="submit"  value="確認"  form = "'+element.ID+'" style="background-color:#66818C;border:0;COLOR:white" >'+'</td>'+
+                                      '<input type="submit" id = "sub" value="確認"  form = "'+element.ID+'" style="background-color:#66818C;border:0;COLOR:white" >'+'</td>'+
                                       '</tr>'
 					 ) ;
 					 
