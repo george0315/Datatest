@@ -30,11 +30,6 @@ if($pw1 == $pw2){
         mysqli_close($conn) ;
        echo '<script>window.location.replace("teacher_change_pw.php");</script>';
 }
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+
 
 

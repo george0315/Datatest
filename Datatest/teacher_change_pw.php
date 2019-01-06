@@ -126,7 +126,7 @@ include 'sql2.inc.php';
                   <a href="#" class="menu-trigger">Menu</a>
                   <ul>
                       <div  style="float: left;line-height:60px">
-                         <?php echo "<li>".$name1."，您好</li>"  ?>
+                         <?php echo "<li>".$name1."老師，您好</li>"  ?>
                       </div>
                       <div  style="text-align:right">
                     <li><a href="#" onclick="location.href='teacher_login.php'">尚未回覆</a></li>

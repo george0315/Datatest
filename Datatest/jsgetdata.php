@@ -4,7 +4,7 @@ $acc = $_SESSION['accnum'];
 include 'sql.inc.php';
 //$conn = mysqli_connect("localhost","root","7eKyUaaWsNm7O795","data");
 //mysqli_query($conn, "SET NAMES 'utf8'");
-$sql =   "Select ACCNUM,OBJECT,TEACHER,DATE,TIME,NOP,QUESTION_S,STATUS,QUESTION_T FROM reservation where accnum = '$acc'"  ;
+$sql =   "Select * FROM reservation where accnum = '$acc'"  ;
 //ACCNUM,OBJECT,TEACHER,DATE,TIME,NOP,QUESTION_S,STATUS,QUESTION_T
         //"select * from data_1 where ACCNUM= \"{$_SESSION['accnum']}\" ";
 $result = mysqli_query($conn, $sql);
@@ -27,4 +27,3 @@ echo json_encode($output);
 //print_r($json_array) ;
 //echo '</pre>' ;
 ?>
-

@@ -21,11 +21,5 @@ print_r($acc2);
 print_r($name2);
 
 echo'</pre>';
- */
  
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 ?>
