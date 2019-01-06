@@ -77,7 +77,13 @@ include 'sql2.inc.php';
     <script type="text/javascript" src="DataTables/jQuery-3.3.1/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
     <script>
-            
+            function chk(){
+            if(document.send1.status.value== 1 || 2){
+            alert('確認要更改狀態嗎?');
+            //document.send1.status.focus();
+            return true;
+            } 
+		}//chk結束
             $(document).ready(function() {
                             var apiUrl = "teajsgetdata.php" ;                         
 				$.ajax({
@@ -91,7 +97,7 @@ include 'sql2.inc.php';
 					$.each(DataJson.data,function(index, element) {
 						console.log(element);					  
 					$("#demo").append(
-					                  '<tr>'+
+					                  '<tr>'+'<form method = "POST" action = "teachstatus.php" id = "'+element.ID+'" name="send1" Onsubmit="return chk();">'+
                                       '<td>'+ element.NAME_S +'</td>'+
                                       '<td>'+ element.OBJECT +'</td>'+
                                       '<td>'+ element.DATE +'</td>'+
@@ -99,10 +105,11 @@ include 'sql2.inc.php';
                                       '<td>'+ element.NOP +'</td>'+
                                       '<td>'+ element.QUESTION_S+'</td>'+
                                       '<td>'+ element.QUESTION_T+'</td>'+
-									  '<td>'+ '<textarea cols="25" rows="3" placeholder="備註" class="textbox2">'+'</textarea>'+'</td>'+
+									  '<td>'+  '<textarea name="comment" form = "'+element.ID +'"  cols="25" rows="3" placeholder="如有需要更改備註，請在此回覆!" class="textbox2">'+'</textarea>'+'</td>'+
                                       '<td>'+ element.STATUS+'</td>'+
-                                      '<td>'+'<select class="textbox1"><option selected="true">更改狀態</option><option >接受</option><option >婉拒</option></select>'+
-                                      '<input type="submit"  value="確認"  style="background-color:#66818C;border:0;COLOR:white" onclick="signup()" >'+'</td>'+
+                                      '<td>'+'<select name = "status" form = "'+element.ID+'" class="textbox1"><option selected="true" value = "0">更改狀態</option><option value = "1">接受</option><option value="2">婉拒</option></select>'+
+									  '<input type="hidden" form = "'+element.ID+'"  name="id" value="'+element.ID +'">'+
+                                      '<input type="submit"  value="確認"  form = "'+element.ID+'" style="background-color:#66818C;border:0;COLOR:white" >'+'</td>'+
                                       '</tr>'
 					 ) ;
 					 
@@ -115,18 +122,7 @@ include 'sql2.inc.php';
                     }
 				});
                                 
-            } );
-			function cancel(number){
-                   if(confirm("您確定要取消預約嗎？"))
-                    {
-						var id = number ;
-						//sessionStorage.setItem("id", number);
-				        location.href ="cancelstudent.php?id="+id;
-                    }
-                    else
-                   {
-                    }
-                };
+            } );//document結束			
         </script>
     </head>
     <body>

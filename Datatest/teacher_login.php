@@ -86,8 +86,15 @@ include 'sql2.inc.php';
         </style>
 		<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css">
         <script type="text/javascript" src="DataTables/jQuery-3.3.1/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="DataTables/datatables.min.js"></script>	
+        <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 		<script>
+		function chk(){
+            if(document.send1.status.value== 0 || null){
+            alert('狀態尚未選擇,請選擇後再試一次');
+            document.send1.status.focus();
+            return false;
+            } 
+		}//chk結束
 		$(document).ready(function() {
                             var apiUrl = "teajsgetdata2.php" ;                         
 				$.ajax({
@@ -102,18 +109,19 @@ include 'sql2.inc.php';
 						console.log(element);
                           //判斷式寫在這邊element.StaTUS 						
 					$("#demo").append(
-					                  '<tr>'+
+					                  '<tr>'+'<form method = "POST" action = "teacon.php" id = "'+element.ID+'" name="send1" Onsubmit="return chk();">'+
                                       '<td>'+ element.NAME_S +'</td>'+
                                       '<td>'+ element.OBJECT +'</td>'+
                                       '<td>'+ element.DATE +'</td>'+
                                       '<td>'+ element.TIME +'</td>'+
                                       '<td>'+ element.NOP +'</td>'+
                                       '<td>'+ element.QUESTION_S+'</td>'+
-									  '<td>'+ '<textarea cols="25" rows="3" placeholder="請在此回覆!" class="textbox2" name="text" id="text">'+'</textarea>'+'</td>'+
+									  '<td>'+ '<textarea name="comment" form = "'+element.ID +'"  cols="25" rows="3" placeholder="請在此回覆!" class="textbox2">'+'</textarea>'+'</td>'+
                                       '<td>'+ element.STATUS+'</td>'+
-                                      '<td>'+'<select class="textbox1" id = "select" Onchange = "chg(this.value)" ><option selected="true" value = "0"></option><option value = "1">接受</option><option value="2">婉拒</option></select>'+
-                                      '<input type="submit"  value="確認"  style="background-color:#66818C;border:0;COLOR:white" onclick="con('+element.ID+')" >'+'</td>'+
-                                      '</tr>'
+                                      '<td>'+'<select name = "status" form = "'+element.ID+'" class="textbox1"><option selected="true" value = "0"></option><option value = "1">接受</option><option value="2">婉拒</option></select>'+
+									  '<input type="hidden" form = "'+element.ID+'"  name="id" value="'+element.ID +'">'+
+                                      '<input type="submit" form = "'+element.ID+'" value="確認"  style="background-color:#66818C;border:0;COLOR:white" >'+'</td>'+
+                                      '</form>'+'</tr>'
 					 ) ;
 					 
 					});
@@ -126,32 +134,8 @@ include 'sql2.inc.php';
 				});
                                 
             } );
-			function chg(s){
-				      var value1 =  s ; //$("#select option:selected").val() ; //獲取Select選擇的Value
-					  //alert(value1) ;
-			        }; //為Select添加事件，當選擇其中一項時觸發
-			function con(number){
-				
-				   if($("#select").val()==1){
-					   var status1 = "接受" ;
-				   }else if($("#select").val()== 2){
-					   var status1 = "婉拒" ; 
-				   }else if($("#select").val()== 0 ||   null ){
-					  alert('狀態尚未選擇,請選擇後再試一次');
-                      //document.demo.select.focus(); 
-					  return false;
-				   }
-                   if(confirm("您確定"+status1+"預約嗎？"))
-                    {
-						var text = $("#text").val() ;
-						var id = number ;
-				        location.href ="teacon.php?id="+id+"status ="+value1+"text ="+text;
-                    }
-                    else
-                   {
-                    }
-                };
-        </script>
+		</script>
+		
     </head>
     <body>
 	<div class = new>
