@@ -11,7 +11,8 @@ $row=mysqli_fetch_array($re,MYSQLI_ASSOC);
 $sqlstatus = $row["STATUS"] ;
 if($comment != "" || null){
  if($status == 1){
-	$status1 = "接受" ;
+	 $status1 = "接受" ;
+	 //if($sqlstatus != $status){ 
 	$sql = "UPDATE reservation SET status = '$status1' ,QUESTION_T = '$comment' where ID = '$id' " ;
 	if(mysqli_query($conn,$sql)){
 	    echo '<script>alert("修改成功");</script>';
@@ -21,7 +22,9 @@ if($comment != "" || null){
 		echo '<script>alert("修改失敗");</script>';
         mysqli_close($conn) ;
 		echo '<script>window.location.replace("teacher_already.php");</script>';
-	}//status== 1結束
+	}
+	//}else if($sqlstatus != $status){   //$sqlstatus != $status結束
+		
 }else if($status == 2){
 	$status1 = "婉拒" ;
 	$sql = "UPDATE reservation SET status = '$status1' ,QUESTION_T = '$comment' where ID = '$id' " ;

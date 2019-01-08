@@ -1,20 +1,5 @@
 <?php
 include 'sql2.inc.php';
-/*
-$conn = mysqli_connect("localhost","root","7eKyUaaWsNm7O795","data");
-$sql1 = "Select * FROM data_2 where ACCNUM = \"{$acc}\" " ;
-$re = mysqli_query($conn,$sql1) ;
-$row=mysqli_fetch_assoc($re);
-$pw = $row['PASSWORD'];
-$name = $row['NAME'];
-$passqa = $row['PASSQA'];
-$department = $row['DEPARTMENT'] ;
-mysqli_query($conn, "SET NAMES 'utf8'");
-$json_array = array();
-$json_encode=json_encode($json_array);
-while ($row = mysqli_fetch_assoc($re)){
-       $json_array[] = $row;
-}*/
 ?>
 
 <html> 
@@ -147,7 +132,7 @@ while ($row = mysqli_fetch_assoc($re)){
                         function logout(){
                         if(confirm("您確定要登出嗎？"))
                         {
-                        alert("登出成功");
+                  
                         location.href='loginout.php';
                         }
                         else
@@ -159,7 +144,7 @@ while ($row = mysqli_fetch_assoc($re)){
                   </ul>
             </nav>
             <div style="width:90%;margin:auto;background-color:white;border-radius:5px;box-shadow:1px 5px 20px -5px rgba(0,0,0,0.8);padding:15px 20px;">
-                <table id="demo">
+       <table id="demo" class = "display">
        <thead>
             <tr>
                 <th>科目</th>

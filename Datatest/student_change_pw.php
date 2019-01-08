@@ -138,7 +138,7 @@ include 'sql2.inc.php';
                         function logout(){
                         if(confirm("您確定要登出嗎？"))
                         {
-                        alert("登出成功");
+                
                         location.href='loginout.php';
                         }
                         else

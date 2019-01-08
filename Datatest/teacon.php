@@ -9,6 +9,10 @@ if($status == 1){
 	$status1 = "接受" ;
 }else if($status == 2){
 	$status1 = "婉拒" ;
+}else if($status == 0){
+	echo '<script>alert("狀態未選擇，請選擇後再試一次");</script>';
+    mysqli_close($conn) ;
+    echo '<script>window.location.replace("teacher_login.php");</script>';
 }
 $sql = "UPDATE reservation SET status = '$status1' ,QUESTION_T = '$comment' where ID = '$id' " ;
 if(mysqli_query($conn,$sql))

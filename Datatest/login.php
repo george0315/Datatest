@@ -64,7 +64,7 @@ and open the template in the editor.
         <div class ="all"> 
           <div class="form">
               <form action="login1.php" method="post" name="send" onsubmit="return chk();">
-                <input id="accnum" name="accnum" type="text" placeholder="學號" class="textbox" onkeyup="this.value=this.value.replace(/[\W]/g,'') "
+                <input id="accnum" name="accnum" type="text" placeholder="帳號" class="textbox" onkeyup="this.value=this.value.replace(/[\W]/g,'') "
     onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
                 <input id="password" name="pass" type="password" placeholder="密碼" class="textbox" onkeyup="this.value=this.value.replace(/[\W]/g,'') "
     onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>

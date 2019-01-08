@@ -106,7 +106,7 @@ and open the template in the editor.
             <div class="big">
                 <h1>註冊個人資料</h1>
                 <form action="register_check.php" method="post" name="send" onsubmit="return sign();">
-                <input name="accnum" id="accnum" type="text" placeholder="學號" class="textbox1"/>
+                <input name="accnum" id="accnum" type="text" placeholder="帳號" class="textbox1"/>
                 <input name="name" id="name" type="text" placeholder="姓名" class="textbox1"/>
                 <input name="department" id="department" type="text" placeholder="系級" class="textbox1"/>
                 <input name="pw" id="password" type="password" placeholder="密碼(英數混合且6~20碼)" class="textbox1" onkeyup="this.value=this.value.replace(/[\W]/g,'') "

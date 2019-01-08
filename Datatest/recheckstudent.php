@@ -13,9 +13,11 @@ $nop = $_POST['nop'] ;
 $questions = $_POST['question_s'] ;
 $nowtime =  strtotime($now) ;
 $future =  strtotime($date) ;
-$sql1 = "Select * FROM information where accnum = '$acc'"  ;
-$re = mysqli_query($conn,$sql1) ;
+$sql = "Select * FROM information where accnum = '$acc'"  ;
+$re = mysqli_query($conn,$sql) ;
 $row=mysqli_fetch_array($re,MYSQLI_ASSOC);
+
+
 if($acc != null && $object != null && $teacher != null && $date != null && $time != null && $nop != null)
 {   
   if($nowtime - $future >= 0){
@@ -28,7 +30,7 @@ if($acc != null && $object != null && $teacher != null && $date != null && $time
        if($acc==$acc2[$i] && $date==$date2[$i] && $time == $time2[$i] && $name == $name2[$i]){
                 echo '<script>alert("此時段您已預約，請先取消或選擇其他時段預約");</script>';
                 mysqli_close($conn) ;
-                echo '<script>window.location.replace("student_record.php");</script>';       
+                echo '<script>window.location.replace("student_login.php");</script>';       
                 } 
           } 
        }

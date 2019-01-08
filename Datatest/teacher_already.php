@@ -78,8 +78,8 @@ include 'sql2.inc.php';
     <script type="text/javascript" src="DataTables/datatables.min.js"></script>
     <script>
             function chk(){
-			if(document.send1.status.value== 0){
-				if(document.send1.comment.value == "" || null){
+			if(("#desc").val() == 0||null){
+				if($("#desc").val() == "" || null){
             alert('尚未更改狀態或備註');
             //document.send1.status.focus();
             return false;

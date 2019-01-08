@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <?php
 include 'sql2.inc.php';
 ?>
@@ -187,6 +182,7 @@ include 'sql2.inc.php';
                 <option selected="true">請選擇老師</option>
                 <option >田慧君 老師</option>
                 <option >黃國卿 老師</option>
+				<option >于昌永 老師</option>
                 <option >張建鴻 老師</option>
                 <option >念家興 老師</option>
                 <option >林吉田 老師</option>
