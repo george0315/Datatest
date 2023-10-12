@@ -102,7 +102,13 @@ include 'sql2.inc.php';
                                    console.log(DataJson.data);
 					$("#demo").append('<tbody>');
 					$.each(DataJson.data,function(index, element) {
-						console.log(element);					  
+						console.log(element);
+						var sta ;
+                        if(element.STATUS == "接受"){
+							  sta = '<font color = "#32CD32"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ;
+						  }else if(element.STATUS == "婉拒"){
+                              sta = '<font color = "#DC143C"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ;
+						  }							  
 					$("#demo").append(
 					                  '<tr>'+'<form method = "POST" action = "teachstatus.php" id = "'+element.ID+'" name="send1" Onsubmit="return chk();">'+
                                       '<td>'+ element.NAME_S +'</td>'+
@@ -113,7 +119,7 @@ include 'sql2.inc.php';
                                       '<td>'+ element.QUESTION_S+'</td>'+
                                       '<td>'+ element.QUESTION_T+'</td>'+
 									  '<td>'+  '<textarea name="comment" form = "'+element.ID +'"  cols="25" rows="3" placeholder="如有需要更改備註，請在此回覆!" class="textbox2">'+'</textarea>'+'</td>'+
-                                      '<td>'+ element.STATUS+'</td>'+
+                                      '<td>'+ sta+'</td>'+
                                       '<td>'+'<select name = "status" form = "'+element.ID+'" class="textbox1"><option selected="true" value = "0">更改狀態</option><option value = "1">接受</option><option value="2">婉拒</option></select>'+
 									  '<input type="hidden" form = "'+element.ID+'"  name="id" value="'+element.ID +'">'+
                                       '<input type="submit" id = "sub" value="確認"  form = "'+element.ID+'" style="background-color:#66818C;border:0;COLOR:white" >'+'</td>'+

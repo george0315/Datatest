@@ -77,7 +77,17 @@ include 'sql2.inc.php';
                                    console.log(DataJson.data);
 					$("#demo").append('<tbody>');
 					$.each(DataJson.data,function(index, element) {
-						console.log(element);					  
+						console.log(element);	
+                        var sta ;
+                        if(element.STATUS == "接受"){
+							  sta = '<font color = "#32CD32"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ;
+						  }else if(element.STATUS == "婉拒"){
+                              sta = '<font color = "#DC143C"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ;
+						  }else if(element.STATUS == "審核中"){
+							sta = '<font color = "#FF8C00"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ; 
+						  }else if(element.STATUS == "已取消"){
+							sta = '<font color = "#DC143C"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ; 
+						  }										  
 					$("#demo").append(
 					                  '<tr>'+
                                       '<td>'+ element.OBJECT +'</td>'+
@@ -86,7 +96,7 @@ include 'sql2.inc.php';
                                       '<td>'+ element.TIME +'</td>'+
                                       '<td>'+ element.NOP +'</td>'+
                                       '<td>'+ element.QUESTION_S+'</td>'+
-                                      '<td>'+ element.STATUS+'</td>'+
+                                      '<td>'+ sta+'</td>'+
                                       '<td>'+ element.QUESTION_T+'</td>'+
                                       '<td>'+'<input type="button"  value="取消"  style="background-color:#66818C;border:0;COLOR:white" onclick= cancel('+element.ID+')>'+'</td>'+
                                       '</tr>'

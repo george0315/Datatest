@@ -96,18 +96,27 @@ include 'sql2.inc.php';
             } 
 		}//chk結束
 		$(document).ready(function() {
-                            var apiUrl = "teajsgetdata2.php" ;                         
+                            var apiUrl = "teajsgetdata2.php" ;   
+                            var  notice  =  0;							
 				$.ajax({
 				  url: apiUrl ,
 				  type: "GET",
 				  dataType: 'json',
                   //async :false,
 				  success: function(DataJson){
+					  
                                    console.log(DataJson.data);
 					$("#demo").append('<tbody>');
 					$.each(DataJson.data,function(index, element) {
 						console.log(element);
-                          //判斷式寫在這邊element.StaTUS 						
+                          //判斷式寫在這邊element.StaTUS
+                          //if(element.FRE = 0){
+                            //   notice = notice + 1 ;     
+						  //}									
+						  if(element.STATUS == "審核中"){
+							  var sta ;
+							  sta = '<font color = "#AA7700"><span style="font-weight:bold;">' + element.STATUS +'</span></font>' ;
+						  }
 					$("#demo").append(
 					                  '<tr>'+'<form method = "POST" action = "teacon.php" id = "'+element.ID+'" name="send1" Onsubmit="return chk();">'+
                                       '<td>'+ element.NAME_S +'</td>'+
@@ -117,7 +126,7 @@ include 'sql2.inc.php';
                                       '<td>'+ element.NOP +'</td>'+
                                       '<td>'+ element.QUESTION_S+'</td>'+
 									  '<td>'+ '<textarea name="comment" form = "'+element.ID +'"  cols="25" rows="3" placeholder="請在此回覆!" class="textbox2">'+'</textarea>'+'</td>'+
-                                      '<td>'+ element.STATUS+'</td>'+
+                                      '<td>'+ sta+'</td>'+
                                       '<td>'+'<select name = "status" form = "'+element.ID+'" class="textbox1"><option selected="true" value = "0"></option><option value = "1">接受</option><option value="2">婉拒</option></select>'+
 									  '<input type="hidden" form = "'+element.ID+'"  name="id" value="'+element.ID +'">'+
                                       '<input type="submit" form = "'+element.ID+'" value="確認"  style="background-color:#66818C;border:0;COLOR:white" >'+'</td>'+
@@ -126,13 +135,14 @@ include 'sql2.inc.php';
 					 
 					});
 					$("#demo").append('</tbody>');
-                    $("#demo").DataTable();					
+                    $("#demo").DataTable();
+ 				
 				    },
 				  error: function() {
                                 alert('Fail!');
                     }
 				});
-                                
+                     /*alert('您有'+notice+'則新的預約');*/	            
             } );
 		</script>
 		

@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>test</title>
+        <title>學生諮詢預約系統</title>
         <style>
         div.all{
             position: absolute;
